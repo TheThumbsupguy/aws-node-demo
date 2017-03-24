@@ -4,7 +4,7 @@
   "description": "Demo with Node and AWS",
   "main": "app.js",
   "scripts": {
-    "dev": "nodejs app.js",
+    "dev": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
