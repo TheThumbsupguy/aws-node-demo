@@ -74,7 +74,7 @@ app.put('/api/orders/:orderId', function(req, res) {
     } else {
       res.send({
         orderId: params.Key.orderId,
-        orderName: req.fields.orderName
+        orderName: req.fields.name
       });
     }
   });
