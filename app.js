@@ -13,10 +13,17 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const app = express();
 
 //middleware
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+});
+
 app.use(formidable());
 
 // Get orders
-app.get('/orders', function(req, res){
+app.get('/api/orders', function(req, res){
   docClient.scan({ TableName:"Orders"}, function(err, data) {
     if (err) {
       res.status(500).send(err);
@@ -27,7 +34,7 @@ app.get('/orders', function(req, res){
 });
 
 // Post order
-app.post('/orders', function(req, res) {
+app.post('/api/orders', function(req, res) {
   const params = {
     TableName:'Orders',
     Item: {
@@ -48,7 +55,7 @@ app.post('/orders', function(req, res) {
 });
 
 // Update order
-app.put('/orders/:orderId', function(req, res) {
+app.put('/api/orders/:orderId', function(req, res) {
   const params = {
     TableName:'Orders',
     Key: {
@@ -73,7 +80,7 @@ app.put('/orders/:orderId', function(req, res) {
 });
 
 // Delete order
-app.delete('/orders/:orderId', function(req, res) {
+app.delete('/api/orders/:orderId', function(req, res) {
   const params = {
     TableName:'Orders',
     Key: {
@@ -91,4 +98,4 @@ app.delete('/orders/:orderId', function(req, res) {
   });
 });
 
-app.listen(3000);
+app.listen(8080);
