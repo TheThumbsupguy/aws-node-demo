@@ -40,7 +40,7 @@ app.post('/api/orders', function(req, res) {
     TableName:'Orders',
     Item: {
       orderId: uuid.v1(),
-      orderName: 'Test Order'  
+      orderName: req.fields.name  
     }
   };
   docClient.put(params, function(err, data) {
@@ -64,7 +64,7 @@ app.put('/api/orders/:orderId', function(req, res) {
     },
     UpdateExpression: 'set orderName = :name',
     ExpressionAttributeValues: {
-      ':name' : req.fields.orderName
+      ':name' : req.fields.name
     }
   };  
 
